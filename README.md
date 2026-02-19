@@ -131,6 +131,11 @@ MIT License - See [LICENSE](LICENSE) file for details.
 - [whisper.cpp](https://github.com/ggerganov/whisper.cpp) by Georgi Gerganov
 - [Whisper](https://github.com/openai/whisper) by OpenAI
 
+## Author
+
+Hugo Hernández Valdez  
+[valdora.mx](https://valdora.mx)
+
 ### Basic Example
 
 ```kotlin
