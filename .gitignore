@@ -12,6 +12,12 @@ build/
 *.class
 local.properties
 
+# Credentials - NEVER COMMIT
+gradle.properties
+signing.properties
+*.gpg
+secring.gpg
+
 # IDE
 .idea/
 *.iml
