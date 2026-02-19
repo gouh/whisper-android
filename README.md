@@ -304,7 +304,6 @@ MIT
 
 **Hugo Hernández Valdez**
 - Website: [hangouh.me](https://hangouh.me)
-- GitHub: [@gouh](https://github.com/gouh)
 - Email: hugohv10@gmail.com
 
 Built with ❤️ for offline speech recognition on Android
