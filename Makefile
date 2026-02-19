@@ -98,77 +98,13 @@ size:
 # Maven Central Publishing Commands
 
 gpg-setup:
-	@echo "🔐 GPG Key Setup for Maven Central"
-	@echo "===================================="
-	@echo ""
-	@echo "Step 1: Generate GPG key (if you don't have one)"
-	@echo "  gpg --gen-key"
-	@echo ""
-	@echo "Step 2: List your keys"
-	@gpg --list-keys --keyid-format SHORT || echo "No GPG keys found. Run: gpg --gen-key"
-	@echo ""
-	@echo "Step 3: Publish key to server"
-	@echo "  gpg --keyserver keyserver.ubuntu.com --send-keys YOUR_KEY_ID"
-	@echo ""
-	@echo "Step 4: Export secret key"
-	@echo "  gpg --export-secret-keys -o ~/.gnupg/secring.gpg"
-	@echo ""
-	@echo "Step 5: Update gradle.properties with:"
-	@echo "  signing.keyId=LAST_8_CHARS_OF_KEY_ID"
-	@echo "  signing.password=YOUR_GPG_PASSWORD"
-	@echo "  signing.secretKeyRingFile=/Users/hugh/.gnupg/secring.gpg"
+	@./scripts/gpg-setup.sh
 
 verify-pom:
-	@echo "📋 Verifying POM Configuration"
-	@echo "==============================="
-	@echo ""
-	@echo "Generating POM file..."
-	@./gradlew :library:generatePomFileForReleasePublication
-	@echo ""
-	@echo "POM Content:"
-	@cat library/build/publications/release/pom-default.xml
-	@echo ""
-	@echo "✅ Check that all information is correct:"
-	@echo "  - groupId: mx.valdora"
-	@echo "  - artifactId: whisper-android"
-	@echo "  - version: 1.0.0"
-	@echo "  - name, description, url"
-	@echo "  - license (MIT)"
-	@echo "  - developer info"
-	@echo "  - SCM info"
+	@./scripts/verify-pom.sh
 
 publish-staging:
-	@echo "🚀 Publishing to Sonatype Staging"
-	@echo "=================================="
-	@echo ""
-	@echo "Prerequisites:"
-	@echo "  ✓ Sonatype account created and approved"
-	@echo "  ✓ Credentials in gradle.properties"
-	@echo "  ✓ GPG key generated and published"
-	@echo ""
-	@read -p "Continue? (y/n) " -n 1 -r; \
-	echo; \
-	if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
-		echo "Building and signing..."; \
-		./gradlew clean :library:assembleRelease; \
-		echo ""; \
-		echo "Publishing to staging..."; \
-		./gradlew :library:publishReleasePublicationToSonatypeRepository; \
-		echo ""; \
-		echo "✅ Published to staging!"; \
-		echo ""; \
-		echo "Next steps (MANUAL):"; \
-		echo "  1. Go to https://s01.oss.sonatype.org/"; \
-		echo "  2. Login with your credentials"; \
-		echo "  3. Click 'Staging Repositories'"; \
-		echo "  4. Find 'mxvaldora-XXXX'"; \
-		echo "  5. Select it and click 'Close'"; \
-		echo "  6. Wait for validation (~5 min)"; \
-		echo "  7. Click 'Release'"; \
-		echo "  8. Wait for sync to Maven Central (~30 min)"; \
-		echo ""; \
-		echo "Verify at: https://repo1.maven.org/maven2/mx/valdora/whisper-android/"; \
-	fi
+	@./scripts/publish-staging.sh
 
 # Quick commands
 all: clean release
