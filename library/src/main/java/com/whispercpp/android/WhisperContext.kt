@@ -22,40 +22,22 @@ class WhisperContext(modelPath: String) : Closeable {
     }
     
     /**
-     * Transcribe audio file (supports WAV, MP3, M4A, AAC, OGG, FLAC, etc.)
+     * Transcribe WAV audio file (16kHz, mono, PCM)
      * 
-     * @param audioPath Absolute path to audio file
-     * @param autoConvert Automatically convert non-WAV files (default: true, requires FFmpeg)
+     * @param audioFile Audio file to transcribe
      * @return Transcribed text
      */
-    suspend fun transcribe(audioPath: String, autoConvert: Boolean = true): String = withContext(Dispatchers.IO) {
-        val isWav = audioPath.endsWith(".wav", ignoreCase = true)
-        
-        val wavPath = if (!isWav && autoConvert) {
-            // Try to convert if FFmpeg is available
-            try {
-                AudioConverter.convertToWav(audioPath)
-            } catch (e: UnsupportedOperationException) {
-                throw UnsupportedOperationException(
-                    "Cannot convert ${File(audioPath).extension} to WAV. " +
-                    "Either provide a WAV file or add FFmpeg dependency: " +
-                    "implementation(\"com.arthenica:ffmpeg-kit-audio:5.1\")",
-                    e
-                )
-            }
-        } else {
-            audioPath
+    suspend fun transcribe(audioFile: File): String = withContext(Dispatchers.IO) {
+        if (!audioFile.exists()) {
+            throw IllegalArgumentException("Audio file does not exist: ${audioFile.absolutePath}")
         }
         
-        val audioData = WhisperLib.readWavFile(wavPath)
-        if (audioData.isEmpty()) {
-            throw IllegalArgumentException("Failed to read audio file: $wavPath")
+        if (!audioFile.name.endsWith(".wav", ignoreCase = true)) {
+            throw IllegalArgumentException("Only WAV files are supported. Got: ${audioFile.extension}")
         }
         
-        // Clean up temp file if we converted
-        if (wavPath != audioPath) {
-            File(wavPath).delete()
-        }
+        val audioData = WhisperLib.readWavFile(audioFile.absolutePath)
+            ?: throw IllegalArgumentException("Failed to read WAV file. Make sure it's 16kHz mono PCM.")
         
         val result = WhisperLib.fullTranscribe(contextPtr, audioData)
         if (result != 0) {
@@ -63,6 +45,7 @@ class WhisperContext(modelPath: String) : Closeable {
         }
         
         WhisperLib.getTranscriptionText(contextPtr)
+            ?: throw RuntimeException("Failed to get transcription text")
     }
     
     /**
@@ -78,6 +61,7 @@ class WhisperContext(modelPath: String) : Closeable {
         }
         
         WhisperLib.getTranscriptionText(contextPtr)
+            ?: throw RuntimeException("Failed to get transcription text")
     }
     
     override fun close() {

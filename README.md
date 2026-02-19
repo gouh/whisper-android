@@ -5,13 +5,12 @@ Offline speech-to-text library for Android using [whisper.cpp](https://github.co
 ## Features
 
 - ✅ 100% offline transcription
-- ✅ No external API calls
+- ✅ No external API calls or dependencies
 - ✅ Supports Spanish and multiple languages
-- ✅ WAV support built-in (no extra dependencies)
-- ✅ Optional MP3/M4A/AAC/OGG/FLAC support (with FFmpeg)
-- ✅ Automatic audio conversion
+- ✅ WAV audio support (16kHz, mono, PCM)
 - ✅ Kotlin coroutines support
-- ✅ Lightweight (1.9 MB base, ~10 MB with FFmpeg)
+- ✅ Lightweight (1.9 MB)
+- ✅ arm64-v8a and x86_64 architectures
 
 ## Installation
 
@@ -20,21 +19,8 @@ Offline speech-to-text library for Android using [whisper.cpp](https://github.co
 ```gradle
 dependencies {
     implementation 'com.whispercpp:whisper-android:1.0.0'
-    
-    // Optional: For MP3/M4A/AAC/OGG support (adds ~8MB)
-    implementation 'com.arthenica:ffmpeg-kit-audio:5.1'
 }
 ```
-
-### ⚠️ Important: Audio Format Support
-
-| Format | Requires FFmpeg? | Library Size |
-|--------|-----------------|--------------|
-| WAV    | ❌ No (built-in) | 1.9 MB      |
-| MP3, M4A, AAC, OGG, FLAC | ✅ Yes (add dependency above) | +8 MB |
-
-**Without FFmpeg**: Only WAV files work  
-**With FFmpeg**: All audio formats work automatically
 
 ### Download Model
 
