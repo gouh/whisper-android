@@ -134,8 +134,8 @@ MIT License - See [LICENSE](LICENSE) file for details.
 ## Author
 
 Hugo Hernández Valdez  
-Email: hugohv10@gmail.com  
-Website: [hangouh.me](https://hangouh.me)
+Website: [hangouh.me](https://hangouh.me)  
+Email: hugohv10@gmail.com
 
 ### Basic Example
 
