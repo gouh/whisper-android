@@ -134,7 +134,8 @@ MIT License - See [LICENSE](LICENSE) file for details.
 ## Author
 
 Hugo Hernández Valdez  
-[valdora.mx](https://valdora.mx)
+Email: hugohv10@gmail.com  
+Website: [valdora.mx](https://valdora.mx)
 
 ### Basic Example
 
