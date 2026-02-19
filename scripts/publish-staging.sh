@@ -50,8 +50,8 @@ fi
 
 # Publish
 echo ""
-echo "Publishing to staging..."
-./gradlew :library:publishReleasePublicationToSonatypeRepository
+echo "Publishing to Central Portal..."
+./gradlew publishAllPublicationsToCentralPortal
 
 if [ $? -ne 0 ]; then
     echo "Publishing failed"
@@ -60,16 +60,12 @@ fi
 
 # Success
 echo ""
-echo "Published to staging!"
+echo "Published to Central Portal!"
 echo ""
-echo "Next steps (MANUAL):"
-echo "  1. Go to https://s01.oss.sonatype.org/"
-echo "  2. Login with your credentials"
-echo "  3. Click 'Staging Repositories'"
-echo "  4. Find 'mxvaldora-XXXX'"
-echo "  5. Select it and click 'Close'"
-echo "  6. Wait for validation (~5 min)"
-echo "  7. Click 'Release'"
-echo "  8. Wait for sync to Maven Central (~30 min)"
+echo "Next steps:"
+echo "  1. Go to https://central.sonatype.com/publishing/deployments"
+echo "  2. Check deployment status"
+echo "  3. If PENDING, it will auto-publish in ~10 minutes"
+echo "  4. Wait for sync to Maven Central (~30 min)"
 echo ""
 echo "Verify at: https://repo1.maven.org/maven2/mx/valdora/whisper-android/"

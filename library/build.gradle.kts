@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("maven-publish")
     id("signing")
+    id("com.gradleup.nmcp") version "0.0.4"
 }
 
 android {
@@ -95,10 +96,8 @@ publishing {
     
     repositories {
         maven {
-            name = "sonatype"
-            val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-            url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
+            name = "central"
+            url = uri("https://central.sonatype.com/api/v1/publisher/upload")
             
             credentials {
                 username = project.findProperty("ossrhUsername") as String? ?: System.getenv("OSSRH_USERNAME")
@@ -110,4 +109,12 @@ publishing {
 
 signing {
     sign(publishing.publications["release"])
+}
+
+nmcp {
+    publishAllPublications {
+        username = project.findProperty("ossrhUsername") as String? ?: System.getenv("OSSRH_USERNAME")
+        password = project.findProperty("ossrhPassword") as String? ?: System.getenv("OSSRH_PASSWORD")
+        publicationType = "AUTOMATIC"
+    }
 }
