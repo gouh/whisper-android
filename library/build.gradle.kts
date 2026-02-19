@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.whispercpp.android"
+    namespace = "mx.valdora.whisper"
     compileSdk = 34
 
     defaultConfig {
@@ -55,7 +55,7 @@ dependencies {
 publishing {
     publications {
         create<MavenPublication>("release") {
-            groupId = "com.whispercpp"
+            groupId = "mx.valdora"
             artifactId = "whisper-android"
             version = "1.0.0"
             

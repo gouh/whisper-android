@@ -118,7 +118,7 @@ std::vector<float> read_wav(const std::string& filename) {
 extern "C" {
 
 JNIEXPORT jfloatArray JNICALL
-Java_com_whispercpp_WhisperLib_readWavFile(JNIEnv *env, jclass clazz, jstring filePath) {
+Java_mx_valdora_whisper_WhisperLib_readWavFile(JNIEnv *env, jclass clazz, jstring filePath) {
     const char *path = env->GetStringUTFChars(filePath, nullptr);
     
     std::vector<float> audio = read_wav(path);
@@ -136,7 +136,7 @@ Java_com_whispercpp_WhisperLib_readWavFile(JNIEnv *env, jclass clazz, jstring fi
 }
 
 JNIEXPORT jlong JNICALL
-Java_com_whispercpp_WhisperLib_initContext(JNIEnv *env, jclass clazz, jstring modelPath) {
+Java_mx_valdora_whisper_WhisperLib_initContext(JNIEnv *env, jclass clazz, jstring modelPath) {
     const char *model_path = env->GetStringUTFChars(modelPath, nullptr);
     
     LOGI("Loading model: %s", model_path);
@@ -156,7 +156,7 @@ Java_com_whispercpp_WhisperLib_initContext(JNIEnv *env, jclass clazz, jstring mo
 }
 
 JNIEXPORT jint JNICALL
-Java_com_whispercpp_WhisperLib_fullTranscribe(JNIEnv *env, jclass clazz, jlong contextPtr, jfloatArray audioData) {
+Java_mx_valdora_whisper_WhisperLib_fullTranscribe(JNIEnv *env, jclass clazz, jlong contextPtr, jfloatArray audioData) {
     auto *ctx = reinterpret_cast<struct whisper_context *>(contextPtr);
     
     if (ctx == nullptr) {
@@ -190,7 +190,7 @@ Java_com_whispercpp_WhisperLib_fullTranscribe(JNIEnv *env, jclass clazz, jlong c
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_whispercpp_WhisperLib_getTranscriptionText(JNIEnv *env, jclass clazz, jlong contextPtr) {
+Java_mx_valdora_whisper_WhisperLib_getTranscriptionText(JNIEnv *env, jclass clazz, jlong contextPtr) {
     auto *ctx = reinterpret_cast<struct whisper_context *>(contextPtr);
     
     if (ctx == nullptr) {
@@ -214,7 +214,7 @@ Java_com_whispercpp_WhisperLib_getTranscriptionText(JNIEnv *env, jclass clazz, j
 }
 
 JNIEXPORT void JNICALL
-Java_com_whispercpp_WhisperLib_freeContext(JNIEnv *env, jclass clazz, jlong contextPtr) {
+Java_mx_valdora_whisper_WhisperLib_freeContext(JNIEnv *env, jclass clazz, jlong contextPtr) {
     auto *ctx = reinterpret_cast<struct whisper_context *>(contextPtr);
     
     if (ctx != nullptr) {

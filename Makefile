@@ -68,7 +68,7 @@ publish:
 	@echo ""
 	@echo "To use in other projects:"
 	@echo "  repositories { mavenLocal() }"
-	@echo "  dependencies { implementation 'com.whispercpp:whisper-android:1.0.0' }"
+	@echo "  dependencies { implementation 'mx.valdora:whisper-android:1.0.0' }"
 
 jitpack:
 	@echo "Preparing for JitPack..."

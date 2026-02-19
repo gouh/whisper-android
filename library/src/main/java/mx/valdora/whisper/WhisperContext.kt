@@ -1,6 +1,5 @@
-package com.whispercpp.android
+package mx.valdora.whisper
 
-import com.whispercpp.WhisperLib
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.Closeable
