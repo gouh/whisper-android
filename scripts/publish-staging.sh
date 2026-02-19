@@ -1,32 +1,32 @@
 #!/bin/bash
 # Publish to Sonatype staging repository
 
-echo "🚀 Publishing to Sonatype Staging"
+echo "Publishing to Sonatype Staging"
 echo "=================================="
 echo ""
 
 # Check prerequisites
 echo "Prerequisites:"
-echo "  ✓ Sonatype account created and approved"
-echo "  ✓ Credentials in gradle.properties"
-echo "  ✓ GPG key generated and published"
+echo "  Sonatype account created and approved"
+echo "  Credentials in gradle.properties"
+echo "  GPG key generated and published"
 echo ""
 
 # Check if gradle.properties exists
 if [ ! -f "gradle.properties" ]; then
-    echo "❌ gradle.properties not found"
+    echo "gradle.properties not found"
     echo "Create it with your Sonatype credentials"
     exit 1
 fi
 
 # Check if credentials are set
 if ! grep -q "ossrhUsername" gradle.properties; then
-    echo "❌ ossrhUsername not found in gradle.properties"
+    echo "ossrhUsername not found in gradle.properties"
     exit 1
 fi
 
 if ! grep -q "ossrhPassword" gradle.properties; then
-    echo "❌ ossrhPassword not found in gradle.properties"
+    echo "ossrhPassword not found in gradle.properties"
     exit 1
 fi
 
@@ -44,7 +44,7 @@ echo "Building and signing..."
 ./gradlew clean :library:assembleRelease
 
 if [ $? -ne 0 ]; then
-    echo "❌ Build failed"
+    echo "Build failed"
     exit 1
 fi
 
@@ -54,13 +54,13 @@ echo "Publishing to staging..."
 ./gradlew :library:publishReleasePublicationToSonatypeRepository
 
 if [ $? -ne 0 ]; then
-    echo "❌ Publishing failed"
+    echo "Publishing failed"
     exit 1
 fi
 
 # Success
 echo ""
-echo "✅ Published to staging!"
+echo "Published to staging!"
 echo ""
 echo "Next steps (MANUAL):"
 echo "  1. Go to https://s01.oss.sonatype.org/"

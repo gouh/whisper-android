@@ -1,7 +1,7 @@
 #!/bin/bash
 # Verify POM configuration before publishing
 
-echo "📋 Verifying POM Configuration"
+echo "Verifying POM Configuration"
 echo "==============================="
 echo ""
 
@@ -10,7 +10,7 @@ echo "Generating POM file..."
 ./gradlew :library:generatePomFileForReleasePublication
 
 if [ ! -f "library/build/publications/release/pom-default.xml" ]; then
-    echo "❌ POM file not found"
+    echo "POM file not found"
     exit 1
 fi
 
@@ -21,7 +21,7 @@ cat library/build/publications/release/pom-default.xml
 
 echo ""
 echo ""
-echo "✅ Checklist:"
+echo "Checklist:"
 echo "  [ ] groupId: mx.valdora"
 echo "  [ ] artifactId: whisper-android"
 echo "  [ ] version: 1.0.0"

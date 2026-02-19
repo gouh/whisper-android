@@ -33,19 +33,19 @@ release:
 	@echo "Building release AAR..."
 	./gradlew :library:assembleRelease
 	@echo ""
-	@echo "✅ Release AAR created:"
+	@echo "Release AAR created:"
 	@ls -lh library/build/outputs/aar/library-release.aar
 
 clean:
 	@echo "Cleaning build artifacts..."
 	./gradlew clean
 	@rm -rf library/build
-	@echo "✅ Clean complete"
+	@echo "Clean complete"
 
 install:
 	@echo "Installing to Maven Local (~/.m2)..."
 	./gradlew :library:publishToMavenLocal
-	@echo "✅ Installed to ~/.m2/repository/mx/valdora/whisper-android/"
+	@echo "Installed to ~/.m2/repository/mx/valdora/whisper-android/"
 
 test:
 	@echo "Running unit tests..."

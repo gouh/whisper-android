@@ -1,13 +1,13 @@
 #!/bin/bash
 # GPG Setup for Maven Central signing
 
-echo "🔐 GPG Key Setup for Maven Central"
+echo "GPG Key Setup for Maven Central"
 echo "===================================="
 echo ""
 
 # Check if GPG is installed
 if ! command -v gpg &> /dev/null; then
-    echo "❌ GPG not found. Install with: brew install gnupg"
+    echo "GPG not found. Install with: brew install gnupg"
     exit 1
 fi
 
@@ -15,7 +15,7 @@ echo "Current GPG keys:"
 gpg --list-keys --keyid-format SHORT
 
 echo ""
-echo "📝 Setup Steps:"
+echo "Setup Steps:"
 echo ""
 echo "1. Generate GPG key (if you don't have one):"
 echo "   gpg --gen-key"
