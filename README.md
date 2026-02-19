@@ -14,13 +14,9 @@ Offline speech-to-text library for Android using [whisper.cpp](https://github.co
 
 ## Installation
 
-### Maven Local
+Add to your `build.gradle`:
 
 ```gradle
-repositories {
-    mavenLocal()
-}
-
 dependencies {
     implementation 'mx.valdora:whisper-android:1.0.0'
 }
